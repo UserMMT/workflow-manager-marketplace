@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marketplace Kibish Approbation</title>
+  <meta name="description" content="Templates, formulaires et bundles partagés entre toutes les instances Kibish Approbation.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Marketplace Kibish Approbation</h1>
+    <p class="subtitle">Templates, formulaires et bundles partagés entre toutes les instances Kibish Approbation.</p>
+
+    <div class="filters">
+      <input type="search" id="search-input" class="search" placeholder="Rechercher un item…">
+      <select id="category-filter">
+        <option value="">Toutes les catégories</option>
+      </select>
+      <select id="type-filter">
+        <option value="">Tous les types</option>
+      </select>
+    </div>
+
+    <p id="error" class="error" hidden></p>
+    <p id="loading" class="hint">Chargement…</p>
+    <p id="empty" class="hint" hidden>Aucun item ne correspond.</p>
+
+    <div id="entries" class="entries"></div>
+
+    <div id="pagination" class="pagination" hidden>
+      <button id="prev-page" class="btn-page">← Précédent</button>
+      <span id="page-info" class="hint"></span>
+      <button id="next-page" class="btn-page">Suivant →</button>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

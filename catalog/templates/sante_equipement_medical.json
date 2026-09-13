@@ -1,0 +1,70 @@
+{
+    "code": "sante_equipement_medical",
+    "name": "Équipement médical",
+    "description": "Santé (mode single) : validation admin, avec formulaire (équipement + budget) et boucle de correction.",
+    "category": "Santé",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "sante_equipement_medical",
+        "name": "Équipement médical",
+        "form_fields": [
+            {
+                "key": "equipement",
+                "label": "Équipement demandé",
+                "type": "text",
+                "required": true
+            },
+            {
+                "key": "budget",
+                "label": "Budget estimé (€)",
+                "type": "number",
+                "required": true
+            }
+        ],
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "single",
+                "assignees": [
+                    {
+                        "type": "role",
+                        "value": "ADMIN"
+                    }
+                ],
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko",
+                    "changes_requested": "fix"
+                }
+            },
+            {
+                "id": "fix",
+                "type": "correction",
+                "assignees": [
+                    {
+                        "type": "requester"
+                    }
+                ],
+                "correction_policy": {
+                    "resume_strategy": "same_rejecting_step"
+                },
+                "transitions": {
+                    "resubmitted": "$resume"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

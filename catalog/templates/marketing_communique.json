@@ -1,0 +1,53 @@
+{
+    "code": "marketing_communique",
+    "name": "Communiqué de presse",
+    "description": "Marketing (step notification) : validation admin puis notification automatique de toute l'équipe Marketing.",
+    "category": "Marketing",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "marketing_communique",
+        "name": "Communiqué de presse",
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "single",
+                "assignees": [
+                    {
+                        "type": "role",
+                        "value": "ADMIN"
+                    }
+                ],
+                "transitions": {
+                    "approved": "notify",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "notify",
+                "type": "notification",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "MARKETING"
+                    }
+                ],
+                "transitions": {
+                    "completed": "ok"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

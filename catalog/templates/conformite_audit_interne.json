@@ -1,0 +1,48 @@
+{
+    "code": "conformite_audit_interne",
+    "name": "Demande d'audit interne",
+    "description": "Conformité (mode sequential) : Conformité puis Direction.",
+    "category": "Conformité",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "conformite_audit_interne",
+        "name": "Demande d'audit interne",
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "sequential",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "COMPLIANCE"
+                    },
+                    {
+                        "type": "group",
+                        "value": "DIRECTION"
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "all_required",
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

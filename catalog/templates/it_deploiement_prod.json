@@ -1,0 +1,59 @@
+{
+    "code": "it_deploiement_prod",
+    "name": "Déploiement en production",
+    "description": "IT (mode sequential + webhook) : IT puis Direction valident, puis un webhook déclenche le déploiement (URL de démo, jamais réellement configurée).",
+    "category": "IT",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "it_deploiement_prod",
+        "name": "Déploiement en production",
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "sequential",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "IT"
+                    },
+                    {
+                        "type": "group",
+                        "value": "DIRECTION"
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "all_required",
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "notify_ci",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "notify_ci",
+                "type": "webhook",
+                "webhook": {
+                    "url": "https://ci.example.local/deploy-hook",
+                    "method": "POST"
+                },
+                "transitions": {
+                    "completed": "ok"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

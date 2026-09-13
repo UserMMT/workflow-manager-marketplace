@@ -1,0 +1,70 @@
+{
+    "code": "demo_conges",
+    "name": "Demande de congés",
+    "description": "Cas d'usage 1 (mode single) : approuvée par le manager direct du demandeur (chemin requester.manager via User.managerId), avec repli sur le rôle manager si celui-ci est indisponible, et boucle de correction si des changements sont demandés.",
+    "category": "RH",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "demo_conges",
+        "name": "Demande de congés",
+        "actors": [
+            {
+                "id": "manager_direct",
+                "type": "relative_user",
+                "path": "requester.manager",
+                "availability_policy": {
+                    "if_unavailable": "fallback_to_role",
+                    "fallback": {
+                        "type": "role",
+                        "code": "MANAGER"
+                    }
+                }
+            }
+        ],
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "single",
+                "assignees": [
+                    {
+                        "type": "actor_ref",
+                        "ref": "manager_direct"
+                    }
+                ],
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko",
+                    "changes_requested": "fix"
+                }
+            },
+            {
+                "id": "fix",
+                "type": "correction",
+                "assignees": [
+                    {
+                        "type": "requester"
+                    }
+                ],
+                "correction_policy": {
+                    "resume_strategy": "same_rejecting_step"
+                },
+                "transitions": {
+                    "resubmitted": "$resume"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

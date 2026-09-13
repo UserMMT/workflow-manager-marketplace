@@ -1,0 +1,52 @@
+{
+    "code": "demo_note_frais",
+    "name": "Note de frais",
+    "description": "Cas d'usage 2 (mode sequential) : validation en cascade, un rôle à la fois — manager puis RH puis admin, dans cet ordre, chacun devant approuver pour que l'étape suivante s'ouvre.",
+    "category": "Finance",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "demo_note_frais",
+        "name": "Note de frais",
+        "start_step": "vote",
+        "steps": [
+            {
+                "id": "vote",
+                "type": "approval",
+                "mode": "sequential",
+                "assignees": [
+                    {
+                        "type": "role",
+                        "value": "MANAGER"
+                    },
+                    {
+                        "type": "role",
+                        "value": "RH"
+                    },
+                    {
+                        "type": "role",
+                        "value": "ADMIN"
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "all_required",
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "backend",
+      "runtimeExecutable": "C:\\xampp\\php\\php.exe",
+      "runtimeArgs": ["-S", "localhost:3030", "-t", "public", "public/index.php"],
+      "cwd": "backend",
+      "port": 3030,
+      "autoPort": false
+    },
+    {
+      "name": "public-front",
+      "runtimeExecutable": "C:\\xampp\\php\\php.exe",
+      "runtimeArgs": ["-S", "localhost:3031"],
+      "cwd": "public-front",
+      "port": 3031,
+      "autoPort": false
+    }
+  ]
+}

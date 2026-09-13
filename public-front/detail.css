@@ -1,0 +1,278 @@
+.back-link {
+  display: inline-block;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.back-link:hover {
+  color: var(--text);
+}
+
+.detail-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.detail-head h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+#entry-description {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.version-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1.25rem 0 1.75rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.version-bar label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.version-bar select {
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.85rem;
+}
+
+.btn-primary {
+  background: #2f5bd7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #2447ac;
+}
+
+.section {
+  margin-bottom: 1.75rem;
+}
+
+.section h2 {
+  font-size: 1rem;
+  margin: 0 0 0.6rem;
+}
+
+.field-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}
+
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.field-row:last-child {
+  border-bottom: none;
+}
+
+.field-row .field-type {
+  color: var(--text-muted);
+}
+
+.required-mark {
+  color: #b91c1c;
+  margin-left: 0.2rem;
+}
+
+.sim-trail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.sim-trail .step-chip {
+  background: var(--chip-bg);
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+}
+
+.sim-step-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.sim-step-card.is-end {
+  border-color: #16a34a;
+}
+
+.sim-step-id {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.sim-step-type {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-left: 0.4rem;
+}
+
+.sim-final-status {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #16a34a;
+  margin: 0.5rem 0;
+}
+
+.sim-kv {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0.3rem 0;
+}
+
+.sim-transitions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.btn-transition {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.btn-transition:hover {
+  border-color: #2f5bd7;
+  color: #2f5bd7;
+}
+
+.btn-restart {
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin-top: 0.75rem;
+}
+
+.form-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.form-preview label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.form-preview input,
+.form-preview select,
+.form-preview textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+}
+
+.form-preview input[type="checkbox"] {
+  width: auto;
+  display: inline-block;
+  margin-right: 0.4rem;
+}
+
+.file-list {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+}
+
+.file-list li {
+  padding: 0.3rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.file-list li:last-child {
+  border-bottom: none;
+}
+
+.raw-json {
+  margin-top: 1.5rem;
+}
+
+.raw-json summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.raw-json pre {
+  margin-top: 0.6rem;
+  background: var(--chip-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.85rem;
+  font-size: 0.78rem;
+  overflow-x: auto;
+  max-height: 420px;
+}
+
+.output-json {
+  margin-top: 0.75rem;
+  background: var(--chip-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.85rem;
+  font-size: 0.78rem;
+  overflow-x: auto;
+}

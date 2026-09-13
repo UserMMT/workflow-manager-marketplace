@@ -1,0 +1,62 @@
+{
+    "code": "operations_materiel",
+    "name": "Demande de matériel",
+    "description": "Opérations (mode single) : validation manager, avec formulaire à liste déroulante (catégorie).",
+    "category": "Opérations",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "operations_materiel",
+        "name": "Demande de matériel",
+        "form_fields": [
+            {
+                "key": "categorie",
+                "label": "Catégorie",
+                "type": "select",
+                "required": true,
+                "options": [
+                    {
+                        "value": "informatique",
+                        "label": "Informatique"
+                    },
+                    {
+                        "value": "mobilier",
+                        "label": "Mobilier"
+                    },
+                    {
+                        "value": "vehicule",
+                        "label": "Véhicule"
+                    }
+                ]
+            }
+        ],
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "single",
+                "assignees": [
+                    {
+                        "type": "role",
+                        "value": "MANAGER"
+                    }
+                ],
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

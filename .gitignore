@@ -1,0 +1,17 @@
+# backend (PHP)
+backend/vendor/
+backend/.env
+backend/*.sqlite
+backend/*.sqlite.scratch
+
+# public-front (Next.js)
+public-front/node_modules/
+public-front/.next/
+public-front/.env.local
+public-front/next-env.d.ts
+public-front/AGENTS.md
+public-front/CLAUDE.md
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,55 @@
+{
+    "code": "it_acces_systeme",
+    "name": "Demande d'accès système",
+    "description": "IT (mode single) : approbation par le groupe IT, avec formulaire (système concerné + justification).",
+    "category": "IT",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "it_acces_systeme",
+        "name": "Demande d'accès système",
+        "form_fields": [
+            {
+                "key": "systeme",
+                "label": "Système concerné",
+                "type": "text",
+                "required": true,
+                "placeholder": "Ex. ERP, VPN, GitHub..."
+            },
+            {
+                "key": "justification",
+                "label": "Justification",
+                "type": "textarea",
+                "required": true
+            }
+        ],
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "single",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "IT"
+                    }
+                ],
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

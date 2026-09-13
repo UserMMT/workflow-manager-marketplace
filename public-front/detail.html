@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title id="page-title">Marketplace Kibish Approbation</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="detail.css">
+</head>
+<body>
+  <main>
+    <a href="index.html" class="back-link">← Retour au catalogue</a>
+
+    <p id="error" class="error" hidden></p>
+    <p id="loading" class="hint">Chargement…</p>
+
+    <div id="content" hidden>
+      <div class="detail-head">
+        <h1 id="entry-name"></h1>
+        <span id="entry-type" class="entry-type"></span>
+      </div>
+      <p id="entry-meta" class="hint"></p>
+      <p id="entry-description"></p>
+
+      <div class="version-bar">
+        <label>Version
+          <select id="version-select"></select>
+        </label>
+        <button id="download-btn" class="btn-primary">Télécharger cette version</button>
+        <span id="download-status" class="hint"></span>
+      </div>
+
+      <div id="viewer"></div>
+
+      <details class="raw-json">
+        <summary>Voir le JSON brut de cette version</summary>
+        <pre id="raw-json-content"></pre>
+      </details>
+    </div>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="detail.js"></script>
+</body>
+</html>

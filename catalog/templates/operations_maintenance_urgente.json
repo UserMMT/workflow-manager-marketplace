@@ -1,0 +1,47 @@
+{
+    "code": "operations_maintenance_urgente",
+    "name": "Maintenance urgente",
+    "description": "Opérations (mode single + escalade SLA) : validation admin, escalade vers la Direction si aucune décision sous 4h.",
+    "category": "Opérations",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "operations_maintenance_urgente",
+        "name": "Maintenance urgente",
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "single",
+                "assignees": [
+                    {
+                        "type": "role",
+                        "value": "ADMIN"
+                    }
+                ],
+                "escalation": {
+                    "after_hours": 4,
+                    "escalate_to": {
+                        "type": "group",
+                        "value": "DIRECTION"
+                    }
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

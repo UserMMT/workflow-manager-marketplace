@@ -1,0 +1,58 @@
+{
+    "code": "legal_litige",
+    "name": "Litige / réclamation",
+    "description": "Juridique (step consultation) : avis consultatif de Juridique + Finance en parallèle, puis décision finale par la Direction.",
+    "category": "Juridique",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "legal_litige",
+        "name": "Litige / réclamation",
+        "start_step": "consult",
+        "steps": [
+            {
+                "id": "consult",
+                "type": "consultation",
+                "mode": "parallel",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "LEGAL"
+                    },
+                    {
+                        "type": "group",
+                        "value": "FINANCE"
+                    }
+                ],
+                "transitions": {
+                    "completed": "decide"
+                }
+            },
+            {
+                "id": "decide",
+                "type": "approval",
+                "mode": "single",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "DIRECTION"
+                    }
+                ],
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

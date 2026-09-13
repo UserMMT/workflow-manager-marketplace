@@ -1,0 +1,61 @@
+{
+    "code": "mali_achat_materiel_agricole",
+    "name": "Achat de matériel agricole",
+    "description": "Mode parallel : Finance vote en parallèle (quorum).",
+    "category": "Achats",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "mali_achat_materiel_agricole",
+        "name": "Achat de matériel agricole",
+        "start_step": "vote",
+        "form_fields": [
+            {
+                "key": "materiel",
+                "label": "Matériel",
+                "type": "text",
+                "required": true
+            },
+            {
+                "key": "montant",
+                "label": "Montant (FCFA)",
+                "type": "number",
+                "required": true
+            }
+        ],
+        "steps": [
+            {
+                "id": "vote",
+                "type": "approval",
+                "mode": "parallel",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "FINANCE_MALI"
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "quorum",
+                    "quorum": {
+                        "minimum_approvals": 1
+                    },
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

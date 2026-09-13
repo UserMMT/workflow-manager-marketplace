@@ -1,0 +1,54 @@
+{
+    "code": "education_formation",
+    "name": "Demande de formation",
+    "description": "Éducation (mode single) : validation RH, avec formulaire (intitulé + coût).",
+    "category": "Éducation",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "education_formation",
+        "name": "Demande de formation",
+        "form_fields": [
+            {
+                "key": "formation",
+                "label": "Intitulé de la formation",
+                "type": "text",
+                "required": true
+            },
+            {
+                "key": "cout",
+                "label": "Coût (€)",
+                "type": "number",
+                "required": false
+            }
+        ],
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "single",
+                "assignees": [
+                    {
+                        "type": "role",
+                        "value": "RH"
+                    }
+                ],
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

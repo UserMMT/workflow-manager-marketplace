@@ -1,0 +1,76 @@
+{
+    "code": "mali_mission_internationale",
+    "name": "Autorisation de mission internationale",
+    "description": "Mode hierarchical_parallel : Logistique niveau 1, Direction niveau 2 peut trancher seule.",
+    "category": "Terrain",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "mali_mission_internationale",
+        "name": "Autorisation de mission internationale",
+        "start_step": "vote",
+        "form_fields": [
+            {
+                "key": "pays",
+                "label": "Pays de destination",
+                "type": "text",
+                "required": true
+            },
+            {
+                "key": "duree_jours",
+                "label": "Durée (jours)",
+                "type": "number",
+                "required": true
+            }
+        ],
+        "steps": [
+            {
+                "id": "vote",
+                "type": "approval",
+                "mode": "hierarchical_parallel",
+                "levels": [
+                    {
+                        "level": 1,
+                        "name": "Logistique",
+                        "assignees": [
+                            {
+                                "type": "group",
+                                "value": "LOGISTIQUE_MALI"
+                            }
+                        ],
+                        "override_lower_levels": false
+                    },
+                    {
+                        "level": 2,
+                        "name": "Direction",
+                        "assignees": [
+                            {
+                                "type": "group",
+                                "value": "DIRECTION_MALI"
+                            }
+                        ],
+                        "override_lower_levels": true
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "highest_level_decides",
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

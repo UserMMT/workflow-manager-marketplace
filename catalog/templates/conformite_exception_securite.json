@@ -1,0 +1,62 @@
+{
+    "code": "conformite_exception_securite",
+    "name": "Exception de sécurité",
+    "description": "Conformité (mode hierarchical_parallel) : Conformité niveau 1, Direction niveau 2 peut trancher seule.",
+    "category": "Conformité",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "conformite_exception_securite",
+        "name": "Exception de sécurité",
+        "start_step": "vote",
+        "steps": [
+            {
+                "id": "vote",
+                "type": "approval",
+                "mode": "hierarchical_parallel",
+                "levels": [
+                    {
+                        "level": 1,
+                        "name": "Conformité",
+                        "assignees": [
+                            {
+                                "type": "group",
+                                "value": "COMPLIANCE"
+                            }
+                        ],
+                        "override_lower_levels": false
+                    },
+                    {
+                        "level": 2,
+                        "name": "Direction",
+                        "assignees": [
+                            {
+                                "type": "group",
+                                "value": "DIRECTION"
+                            }
+                        ],
+                        "override_lower_levels": true
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "highest_level_decides",
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

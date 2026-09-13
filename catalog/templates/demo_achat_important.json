@@ -1,0 +1,62 @@
+{
+    "code": "demo_achat_important",
+    "name": "Achat important",
+    "description": "Cas d'usage 4 (mode hierarchical_parallel) : FINANCE (niveau 1) et DIRECTION (niveau 2) votent en parallèle ; DIRECTION peut à elle seule clore l'étape (override_lower_levels), invalidant une décision déjà prise par FINANCE. Un rejet, à n'importe quel niveau, bloque toujours.",
+    "category": "Achats",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "demo_achat_important",
+        "name": "Achat important",
+        "start_step": "vote",
+        "steps": [
+            {
+                "id": "vote",
+                "type": "approval",
+                "mode": "hierarchical_parallel",
+                "levels": [
+                    {
+                        "level": 1,
+                        "name": "Finance",
+                        "assignees": [
+                            {
+                                "type": "group",
+                                "value": "FINANCE"
+                            }
+                        ],
+                        "override_lower_levels": false
+                    },
+                    {
+                        "level": 2,
+                        "name": "Direction",
+                        "assignees": [
+                            {
+                                "type": "group",
+                                "value": "DIRECTION"
+                            }
+                        ],
+                        "override_lower_levels": true
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "highest_level_decides",
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

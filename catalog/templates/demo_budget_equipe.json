@@ -1,0 +1,47 @@
+{
+    "code": "demo_budget_equipe",
+    "name": "Validation budget d'équipe",
+    "description": "Cas d'usage 3 (mode parallel) : les 3 membres du groupe FINANCE votent en parallèle, 2 approbations sur 3 suffisent (quorum) ; un seul rejet bloque immédiatement, quel que soit le quorum.",
+    "category": "Finance",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "demo_budget_equipe",
+        "name": "Validation budget d'équipe",
+        "start_step": "vote",
+        "steps": [
+            {
+                "id": "vote",
+                "type": "approval",
+                "mode": "parallel",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "FINANCE"
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "quorum",
+                    "quorum": {
+                        "minimum_approvals": 2
+                    },
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

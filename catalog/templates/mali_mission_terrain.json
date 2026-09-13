@@ -1,0 +1,54 @@
+{
+    "code": "mali_mission_terrain",
+    "name": "Demande de mission terrain",
+    "description": "Mode single : validée par un manager (rôle MANAGER).",
+    "category": "Terrain",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "mali_mission_terrain",
+        "name": "Demande de mission terrain",
+        "start_step": "approve",
+        "form_fields": [
+            {
+                "key": "destination",
+                "label": "Destination",
+                "type": "text",
+                "required": true
+            },
+            {
+                "key": "duree_jours",
+                "label": "Durée (jours)",
+                "type": "number",
+                "required": true
+            }
+        ],
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "single",
+                "assignees": [
+                    {
+                        "type": "role",
+                        "value": "MANAGER"
+                    }
+                ],
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

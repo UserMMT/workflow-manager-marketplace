@@ -1,0 +1,55 @@
+{
+    "code": "marketing_campagne",
+    "name": "Campagne publicitaire",
+    "description": "Marketing (mode parallel + quorum) : 2 approbations sur 3 dans le groupe Marketing suffisent.",
+    "category": "Marketing",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "marketing_campagne",
+        "name": "Campagne publicitaire",
+        "form_fields": [
+            {
+                "key": "budget",
+                "label": "Budget (€)",
+                "type": "number",
+                "required": true
+            }
+        ],
+        "start_step": "vote",
+        "steps": [
+            {
+                "id": "vote",
+                "type": "approval",
+                "mode": "parallel",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "MARKETING"
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "quorum",
+                    "quorum": {
+                        "minimum_approvals": 2
+                    },
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

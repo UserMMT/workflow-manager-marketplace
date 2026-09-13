@@ -1,0 +1,64 @@
+{
+    "code": "legal_revue_contrat",
+    "name": "Revue de contrat",
+    "description": "Juridique (mode sequential) : Juridique puis Direction, avec boucle de correction si des changements sont demandés.",
+    "category": "Juridique",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "legal_revue_contrat",
+        "name": "Revue de contrat",
+        "start_step": "approve",
+        "steps": [
+            {
+                "id": "approve",
+                "type": "approval",
+                "mode": "sequential",
+                "assignees": [
+                    {
+                        "type": "group",
+                        "value": "LEGAL"
+                    },
+                    {
+                        "type": "group",
+                        "value": "DIRECTION"
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "all_required",
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko",
+                    "changes_requested": "fix"
+                }
+            },
+            {
+                "id": "fix",
+                "type": "correction",
+                "assignees": [
+                    {
+                        "type": "requester"
+                    }
+                ],
+                "correction_policy": {
+                    "resume_strategy": "same_rejecting_step"
+                },
+                "transitions": {
+                    "resubmitted": "$resume"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}

@@ -1,0 +1,70 @@
+{
+    "code": "ventes_remise",
+    "name": "Remise commerciale exceptionnelle",
+    "description": "Ventes (mode hierarchical_parallel) : Ventes niveau 1, Direction niveau 2 peut trancher seule (override_lower_levels).",
+    "category": "Ventes",
+    "itemType": "template",
+    "version": "1.0.0",
+    "content": {
+        "code": "ventes_remise",
+        "name": "Remise commerciale exceptionnelle",
+        "form_fields": [
+            {
+                "key": "pourcentage",
+                "label": "Pourcentage de remise",
+                "type": "number",
+                "required": true
+            }
+        ],
+        "start_step": "vote",
+        "steps": [
+            {
+                "id": "vote",
+                "type": "approval",
+                "mode": "hierarchical_parallel",
+                "levels": [
+                    {
+                        "level": 1,
+                        "name": "Ventes",
+                        "assignees": [
+                            {
+                                "type": "group",
+                                "value": "SALES"
+                            }
+                        ],
+                        "override_lower_levels": false
+                    },
+                    {
+                        "level": 2,
+                        "name": "Direction",
+                        "assignees": [
+                            {
+                                "type": "group",
+                                "value": "DIRECTION"
+                            }
+                        ],
+                        "override_lower_levels": true
+                    }
+                ],
+                "decision_policy": {
+                    "approve_rule": "highest_level_decides",
+                    "reject_rule": "one_reject_blocks"
+                },
+                "transitions": {
+                    "approved": "ok",
+                    "rejected": "ko"
+                }
+            },
+            {
+                "id": "ok",
+                "type": "end",
+                "final_status": "approved"
+            },
+            {
+                "id": "ko",
+                "type": "end",
+                "final_status": "rejected"
+            }
+        ]
+    }
+}
